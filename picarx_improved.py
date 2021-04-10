@@ -177,19 +177,19 @@ def Get_distance():
 
 
 def test():
-    # dir_servo_angle_calibration(-10)
+    dir_servo_angle_calibration(-10)
     set_dir_servo_angle(-40)
-    # time.sleep(1)
-    # set_dir_servo_angle(0)
-    # time.sleep(1)
-    # set_motor_speed(1, 1)
-    # set_motor_speed(2, 1)
-    # camera_servo_pin.angle(0)
+    time.sleep(1)
+    set_dir_servo_angle(0)
+    time.sleep(1)
+    set_motor_speed(1, 1)
+    set_motor_speed(2, 1)
+    camera_servo_pin.angle(0)
 
-# if __name__ == "__main__":
-#     try:
-#         # dir_servo_angle_calibration(-10)
-#         while 1:
-#             test()
-#     finally:
-#         stop()
+if __name__ == "__main__":
+    try:
+        dir_servo_angle_calibration(-10)
+        while 1:
+            test()
+    finally:
+        stop()

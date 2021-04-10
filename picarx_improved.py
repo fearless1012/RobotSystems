@@ -1,6 +1,11 @@
 import time
+import logging
+import atexit
+from logdecorator import log_on_start, log_on_end, log_on_error
 
-
+logging_format = "%( asctime)s: %( message)s"
+logging.basicConfig(level=logging.INFO, datefmt="%H:%M:%S")
+logging.getLogger().setLevel(logging.DEBUG)
 
 try:
     from ezblock import *

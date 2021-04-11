@@ -184,7 +184,7 @@ def test():
     time.sleep(1)
     set_motor_speed(1, 1)
     set_motor_speed(2, 1)
-    camera_servo_pin.angle(0)
+    #camera_servo_pin.angle(0)
 
 if __name__ == "__main__":
     try:

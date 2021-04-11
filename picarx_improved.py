@@ -62,8 +62,8 @@ def set_motor_speed(motor, speed):
     elif speed < 0:
         direction = -1 * cali_dir_value[motor]
     speed = abs(speed)
-    if speed != 0:
-        speed = int(speed / 2) + 50
+    # if speed != 0:
+    #     speed = int(speed / 2) + 50
     speed = speed - cali_speed_value[motor]
     if direction < 0:
         motor_direction_pins[motor].high()
@@ -143,13 +143,23 @@ def set_power(speed):
 
 
 def backward(speed):
+
     set_motor_speed(1, speed)
     set_motor_speed(2, speed)
 
 
-def forward(speed):
-    set_motor_speed(1, -1 * speed)
-    set_motor_speed(2, -1 * speed)
+def forward(speed, steering_angle = 0):
+    car_length = 0.10
+    car_width = 0.11
+    radius =  car_length*math.tan(steering_angle)
+    wheelr_1 = radius + (car_width/2)
+    wheelr_2 = radius - (car_width/2)
+
+    speed_1 = speed*radius/wheelr_1
+    speed_2 = speed*radius/wheelr_2
+
+    set_motor_speed(1, -1 * speed_1)
+    set_motor_speed(2, -1 * speed_2)
 
 
 def stop():

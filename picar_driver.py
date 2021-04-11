@@ -1,5 +1,5 @@
 import picarx_improved
-from picarx_improved import *
+from time import sleep
 
 def move_forward():
     for i in range(1000):
@@ -41,7 +41,7 @@ def k_turning():
 def keyboard_input():
     speed =0
     angle =0
-    input_choice = get_char("used 'w-s-a-d' for 'forward-backward-left-right' maneuvering. 'e' to exit maneuvering, 'p' to park and 'k' for k_turn")
+    input_choice = input("used 'w-s-a-d' for 'forward-backward-left-right' maneuvering. 'e' to exit maneuvering, 'p' to park and 'k' for k_turn")
 
     while input_choice != 'e':
         if input_choice == 'w':
@@ -53,7 +53,7 @@ def keyboard_input():
         elif input_choice == 'd':
             angle -= 5
         elif input_choice == 'p':
-            get_dir = get_char("'r' for right park and 'l' for left park")
+            get_dir = input("'r' for right park and 'l' for left park")
             parallel_parking(get_dir)
             picarx_improved.stop()
         elif input_choice == 'k':
@@ -62,12 +62,13 @@ def keyboard_input():
 
         picarx_improved.set_dir_servo_angle(angle)
         picarx_improved.forward(speed)
-        input_choice = get_char("Use 'w-s-a-d' for 'forward-backward-left-right' maneuvering. 'e' to exit maneuvering, 'p' to park and 'k' for k_turn")
+        sleep(1)
+        input_choice = input("Use 'w-s-a-d' for 'forward-backward-left-right' maneuvering. 'e' to exit maneuvering, 'p' to park and 'k' for k_turn")
 
 
 if __name__ == "__main__":
     try:
         while 1:
-            keyboard_input()
+            move_forward()
     finally:
-        stop()
+        picarx_improved.stop()

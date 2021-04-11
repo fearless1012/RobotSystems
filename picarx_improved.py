@@ -40,7 +40,17 @@ motor_direction_pins = [left_rear_dir_pin, right_rear_dir_pin]
 motor_speed_pins = [left_rear_pwm_pin, right_rear_pwm_pin]
 cali_dir_value = [1, -1]
 cali_speed_value = [0, 0]
-# 初始化PWM引脚
+
+atexit.register(stop_motors)
+
+@log_on_start(logging.DEBUG , "stopping motors")
+@log_on_error(logging.DEBUG , "error stopping motors")
+@log_on_end(logging.DEBUG , "stopped motors successfully")
+def stop_motors():
+    set_motor_speed(1, 0)
+    set_motor_speed(2, 0)
+
+
 for pin in motor_speed_pins:
     pin.period(PERIOD)
     pin.prescaler(PRESCALER)
@@ -184,7 +194,7 @@ def test():
     time.sleep(1)
     set_motor_speed(1, 1)
     set_motor_speed(2, 1)
-    camera_servo_pin.angle(0)
+    # camera_servo_pin.angle(0)
 
 if __name__ == "__main__":
     try:

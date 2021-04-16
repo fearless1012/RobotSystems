@@ -3,7 +3,7 @@ from time import sleep
 
 def move_forward():
     for i in range(1000):
-        picarx_improved.forward(10,0)
+        picarx_improved.forward(40,0)
     picarx_improved.stop()
 
 def move_backward():

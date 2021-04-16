@@ -67,8 +67,4 @@ def keyboard_input():
 
 
 if __name__ == "__main__":
-    try:
-        while 1:
-            move_forward()
-    finally:
-        picarx_improved.stop()
+    move_forward()

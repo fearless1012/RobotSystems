@@ -40,7 +40,15 @@ motor_direction_pins = [left_rear_dir_pin, right_rear_dir_pin]
 motor_speed_pins = [left_rear_pwm_pin, right_rear_pwm_pin]
 cali_dir_value = [1, -1]
 cali_speed_value = [0, 0]
-# 初始化PWM引脚
+
+@log_on_start(logging.DEBUG , "stopping motors")
+@log_on_error(logging.DEBUG , "error stopping motors")
+@log_on_end(logging.DEBUG , "stopped motors successfully")
+def stop_motors():
+    set_motor_speed(1, 0)
+    set_motor_speed(2, 0)
+
+
 for pin in motor_speed_pins:
     pin.period(PERIOD)
     pin.prescaler(PRESCALER)
@@ -54,8 +62,8 @@ def set_motor_speed(motor, speed):
     elif speed < 0:
         direction = -1 * cali_dir_value[motor]
     speed = abs(speed)
-    if speed != 0:
-        speed = int(speed / 2) + 50
+    # if speed != 0:
+    #     speed = int(speed / 2) + 50
     speed = speed - cali_speed_value[motor]
     if direction < 0:
         motor_direction_pins[motor].high()
@@ -135,13 +143,23 @@ def set_power(speed):
 
 
 def backward(speed):
+
     set_motor_speed(1, speed)
     set_motor_speed(2, speed)
 
 
-def forward(speed):
-    set_motor_speed(1, -1 * speed)
-    set_motor_speed(2, -1 * speed)
+def forward(speed, steering_angle = 0):
+    car_length = 0.10
+    car_width = 0.11
+    radius =  car_length*math.tan(steering_angle)
+    wheelr_1 = radius + (car_width/2)
+    wheelr_2 = radius - (car_width/2)
+
+    speed_1 = speed*radius/wheelr_1
+    speed_2 = speed*radius/wheelr_2
+
+    set_motor_speed(1, -1 * speed_1)
+    set_motor_speed(2, -1 * speed_2)
 
 
 def stop():
@@ -184,7 +202,8 @@ def test():
     time.sleep(1)
     set_motor_speed(1, 1)
     set_motor_speed(2, 1)
-    #camera_servo_pin.angle(0)
+    atexit.register(stop_motors)
+    # camera_servo_pin.angle(0)
 
 if __name__ == "__main__":
     try:

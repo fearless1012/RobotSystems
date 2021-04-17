@@ -3,7 +3,7 @@ from time import sleep
 
 def move_forward():
     for i in range(10):
-        picarx_improved.forward(80,0)
+        picarx_improved.forward(80,30)
     picarx_improved.stop()
 
 def move_backward():
@@ -13,16 +13,16 @@ def move_backward():
 
 def move_left():
     for i in range(100):
-        picarx_improved.set_dir_servo_angle(30)
+        picarx_improved.set_dir_servo_angle(-30)
     for i in range(10):
-        picarx_improved.forward(40,30)
+        picarx_improved.forward(40,-30)
     picarx_improved.stop()
 
 def move_right():
     for i in range(100):
-        picarx_improved.set_dir_servo_angle(-30)
+        picarx_improved.set_dir_servo_angle(30)
     for i in range(10):
-        picarx_improved.forward(40,-30)
+        picarx_improved.forward(40,30)
     picarx_improved.stop()
 
 def parallel_parking(direction='l'):
@@ -40,12 +40,13 @@ def parallel_parking(direction='l'):
     picarx_improved.stop()
 
 def k_turning():
-    picarx_improved.set_dir_servo_angle(-10)
-    picarx_improved.backward(10)
-    sleep(1)
-    picarx_improved.stop()
-    picarx_improved.set_dir_servo_angle(20)
-    picarx_improved.forward(10, 0)
+    for i in range(1000):
+        picarx_improved.set_dir_servo_angle(-10)
+    #picarx_improved.backward(10)
+    #sleep(1)
+    #picarx_improved.stop()
+    #picarx_improved.set_dir_servo_angle(20)
+    #picarx_improved.forward(10, 0)
     sleep(1)
     picarx_improved.stop()
     picarx_improved.forward(10, 0.60)

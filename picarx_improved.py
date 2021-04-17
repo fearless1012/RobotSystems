@@ -162,8 +162,8 @@ def forward(speed, steering_angle = 0):
     speed_2 = speed*radius/wheelr_2
     print(speed_1)
     print(speed_2)
-    set_motor_speed(1, speed_1)
-    set_motor_speed(2, speed_2)
+    set_motor_speed(1, -speed)
+    set_motor_speed(2, -speed/2)
 
 
 def stop():

@@ -2,13 +2,23 @@ import picarx_improved
 from time import sleep
 
 def move_forward():
-    for i in range(1000):
-        picarx_improved.forward(40,0)
+    for i in range(10):
+        picarx_improved.forward(80,25)
     picarx_improved.stop()
 
 def move_backward():
-    for i in range(1000):
-        picarx_improved.backward(10)
+    for i in range(10):
+        picarx_improved.backward(80)
+    picarx_improved.stop()
+
+def move_left():
+    for i in range(10):
+        picarx_improved.forward(40,60)
+    picarx_improved.stop()
+
+def move_right():
+    for i in range(10):
+        picarx_improved.forward(40,-30)
     picarx_improved.stop()
 
 def parallel_parking(direction='l'):
@@ -45,13 +55,13 @@ def keyboard_input():
 
     while input_choice != 'e':
         if input_choice == 'w':
-            speed +=10
+            move_forward()
         elif input_choice == 's':
-            speed -= 10
+            move_backward()
         elif input_choice == 'a':
-            angle += 5
+            move_left()
         elif input_choice == 'd':
-            angle -= 5
+            move_right()
         elif input_choice == 'p':
             get_dir = input("'r' for right park and 'l' for left park")
             parallel_parking(get_dir)
@@ -67,4 +77,4 @@ def keyboard_input():
 
 
 if __name__ == "__main__":
-    move_forward()
+    keyboard_input()

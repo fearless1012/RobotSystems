@@ -146,20 +146,23 @@ def backward(speed):
 
     set_motor_speed(1, speed)
     set_motor_speed(2, speed)
+    print(speed)
 
 
 def forward(speed, steering_angle = 0):
-    car_length = 0.10
-    car_width = 0.11
+    car_length = 1.0
+    car_width = 1.1
     radius =  car_length*math.tan(steering_angle)
     wheelr_1 = radius + (car_width/2)
     wheelr_2 = radius - (car_width/2)
 
     speed_1 = speed*radius/wheelr_1
+    print(speed_1)
     speed_2 = speed*radius/wheelr_2
+    print(speed_2)
 
-    set_motor_speed(1, -1 * speed_1)
-    set_motor_speed(2, -1 * speed_2)
+    set_motor_speed(1, speed_1)
+    set_motor_speed(2, speed_2)
 
 
 def stop():

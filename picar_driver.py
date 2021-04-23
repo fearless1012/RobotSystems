@@ -14,6 +14,8 @@ class picar_driver(picarx_improved):
         self.stop()
 
     def move_backward(self):
+        for i in range(100):
+            self.set_dir_servo_angle(0)
         for i in range(10):
             self.backward(self.speed)
         self.stop()
@@ -73,7 +75,7 @@ class picar_driver(picarx_improved):
                 self.angle = 0
                 self.move_forward()
             elif input_choice == 's':
-                self.speed = 40
+                self.speed = 80
                 self.move_backward()
             elif input_choice == 'a':
                 self.speed = 40

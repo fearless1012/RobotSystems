@@ -40,8 +40,8 @@ class picarx_improved:
         self.dir_cal_value = 0
         self.cam_cal_value_1 = 0
         self.cam_cal_value_2 = 0
-        self.motor_direction_pins = [left_rear_dir_pin, right_rear_dir_pin]
-        self.motor_speed_pins = [left_rear_pwm_pin, right_rear_pwm_pin]
+        self.motor_direction_pins = [self.left_rear_dir_pin, self.right_rear_dir_pin]
+        self.motor_speed_pins = [self.left_rear_pwm_pin, self.right_rear_pwm_pin]
         self.cali_dir_value = [1, -1]
         self.cali_speed_value = [0, 0]
 
@@ -138,6 +138,7 @@ class picarx_improved:
 
     def backward(self, speed):
         logging.debug("backward")
+        print(speed)
         self.set_motor_speed(1, speed)
         self.set_motor_speed(2, speed)
 

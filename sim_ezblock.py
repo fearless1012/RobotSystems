@@ -85,13 +85,10 @@ class ADC():
         return recv
 
     def read(self):
-        value_h = self.recv(1, self.ADDR)[0]
-        value_l = self.recv(1, self.ADDR)[0]
-        value = (value_h << 8) + value_l
-        return value
+        return 0
 
     def read_voltage(self):
-        return self.read * 3.3 / 4095
+        return 0
 
 
 

@@ -49,6 +49,8 @@ class picarx_improved:
             pin.period(self.PERIOD)
             pin.prescaler(self.PRESCALER)
 
+        atexit.register(self.cleanup)
+
 
     @log_on_start(logging.DEBUG , "stopping motors")
     @log_on_error(logging.DEBUG , "error stopping motors")
@@ -56,6 +58,9 @@ class picarx_improved:
     def stop_motors(self):
         self.set_motor_speed(1, 0)
         self.set_motor_speed(2, 0)
+
+    def cleanup(self):
+        self.stop_motors()
 
     def set_motor_speed(self, motor, speed):
         motor -= 1

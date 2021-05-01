@@ -1,4 +1,5 @@
 from time import time
+from  readerwriterlock  import  rwlock
 
 
 class Bus:
@@ -7,11 +8,17 @@ class Bus:
         self.type = msg_type
         self.message = None
         self.time = None
+        self.lock = rwlock.RWLockWriteD ()
 
     def read(self):
+        with  self.lock.gen_rlock ():
+            message = self.message
         return self.message
 
     def write(self, msg):
+        
+        with  self.lock.gen_wlock ():
+            self.message = msg
 
         if self.type is not None:
             assert type(msg) is self.type,\
